@@ -1,5 +1,7 @@
 # Docker HOWTO
 
+- Tutorial: https://docs.docker.com/get-started/
+
 ## Ubuntu Install
 
 - https://docs.docker.com/desktop/install/ubuntu/
@@ -89,6 +91,18 @@ Using Compose is basically a three-step process:
 3. Run docker compose up and the Docker compose command starts and runs your entire app. 
    You can alternatively run `docker-compose up` using Compose standalone (docker-compose binary).
    
+```bash
+docker compose up
+docker compose stop
+docker compose down --volumes
+```
+
+- `-d`: run containers in the background
+
+- Modifying on the fly (listen for changes): make sure to add a volume(s)
+  to `docker-compose.yml`
+
+   
 A docker-compose.yml looks like this:
 
 ```yaml
@@ -109,12 +123,13 @@ volumes:
   logvolume01: {}
 ```
 
-| Compose Application Model |
-| ----------------- |
+| Compose Application Model | Description |
+| ----------------- | ------------- |
 | [Services](https://docs.docker.com/compose/compose-file/#services-top-level-element) | abstract definition of a computing resource, defined by a Docker image and set of runtime arguments |
 | [Networks](https://docs.docker.com/compose/compose-file/#networks-top-level-element) | platform capability abstraction to establish an IP route between containers |
 | [Volumes](https://docs.docker.com/compose/compose-file/#volumes-top-level-element) | services store and share persistent data into volumes |
 | [Configs](https://docs.docker.com/compose/compose-file/#configs-top-level-element) | configuration data that is dependent on the runtime or platform |
+
 
 A **Project** is an individual deployment of an application specification on a platform. A project’s 
 name is used to group resources together and isolate them from other applications or other installation of
@@ -164,6 +179,18 @@ networks:
   back-tier: {}
 ```
 
+- [Environment variable usage](https://docs.docker.com/compose/environment-variables/)
+
+## GPU Support
+
+https://docs.docker.com/config/containers/resource_constraints/#gpu
+
+
+- [**Compose GPU Support**](https://docs.docker.com/compose/gpu-support/)
+- A typical error: https://askubuntu.com/questions/1400476/docker-error-response-from-daemon-could-not-select-device-driver-with-capab
+
+- Add `--gpus all` to `docker run` command
+
 ## Running Stuff
 
 - Building
@@ -176,3 +203,36 @@ networks:
   ```
   - `-d`: detached mode (background)
   - `-p`: mapping between host's port to container's port
+- Stop all containers
+  ```bash
+  docker kill $(docker ps -q)
+  ```
+- Remove all containers
+  ```bash
+  docker rm $(docker ps -a -q)
+  ```
+- Remove all docker images
+  ```bash
+  docker rmi -f $(docker images -q)
+  ```
+- To stop a container: list all containers (`docker container ls`), stop `CONTAINER_ID` and rmove it (`docker rm`)
+
+## Versioning
+
+- Tag image
+  ```bash
+  docker tag <name>[:<tag>] <YOUR-USER-NAME>/<name>
+  ```
+- Push to repository
+  ```bash
+  docker push <YOUR-USER-NAME>/<name>
+  ```
+
+## Binding Mounts
+
+https://docs.docker.com/storage/bind-mounts/#choose-the--v-or---mount-flag
+
+When you use a bind mount, a file or directory on the host machine is mounted into a container.
+The file or directory is referenced by its absolute path on the host machine.
+By contrast, when you use a volume, a new directory is created within Docker’s storage directory
+on the host machine, and Docker manages that directory’s contents.
