@@ -79,6 +79,7 @@ docker context inspect default
 https://docs.docker.com/compose/
 
 - [Compose File Specification](https://docs.docker.com/compose/compose-file/)
+- [Compose File Specification v3](https://docs.docker.com/compose/compose-file/compose-file-v3/)
 
 Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a
 YAML file to configure your application’s services. Then, with a single command, you create and start all
@@ -180,6 +181,7 @@ networks:
 ```
 
 - [Environment variable usage](https://docs.docker.com/compose/environment-variables/)
+- [Docker compose doesn't support dynamic variable evaluation](https://stackoverflow.com/questions/62121588/how-to-evaluate-a-dynamic-variable-in-a-docker-compose-yml-file)
 
 ## GPU Support
 
