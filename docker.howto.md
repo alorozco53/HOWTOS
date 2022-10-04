@@ -190,6 +190,8 @@ https://docs.docker.com/config/containers/resource_constraints/#gpu
 - A typical error: https://askubuntu.com/questions/1400476/docker-error-response-from-daemon-could-not-select-device-driver-with-capab
 
 - Add `--gpus all` to `docker run` command
+- Use GPU while building: https://stackoverflow.com/questions/59691207/docker-build-with-nvidia-runtime
+- Issue with docker container disk size: https://github.com/pytorch/pytorch/issues/2244, https://github.com/pytorch/pytorch/issues/1355
 
 ## Running Stuff
 
